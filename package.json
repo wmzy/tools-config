@@ -1,0 +1,39 @@
+{
+  "name": "dev-config",
+  "version": "0.0.0",
+  "description": "config for eslint, prettier, typescript and others",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "lot.zhu",
+  "license": "ISC",
+  "files": [
+    "config"
+  ],
+  "exports": {
+    "./eslint": "./config/eslint/index.mjs",
+    "./stylelint": "./config/stylelint",
+    "./prettier": "./config/prettier.json",
+    "./typescript": "./config/typescript/tsconfig.json"
+  },
+  "dependencies": {
+    "@eslint/eslintrc": "^3.1.0",
+    "@eslint/js": "^9.8.0",
+    "@typescript-eslint/eslint-plugin": "^8.0.1",
+    "@typescript-eslint/parser": "^8.0.1",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-react": "^7.35.0",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-react-refresh": "^0.4.9",
+    "globals": "^15.9.0",
+    "stylelint-prettier": "^5.0.2"
+  },
+  "devDependencies": {
+    "@eslint/compat": "^1.1.1",
+    "@types/eslint": "^9.6.0",
+    "typescript": "^5.5.4"
+  }
+}
