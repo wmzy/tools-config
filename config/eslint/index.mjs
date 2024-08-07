@@ -9,6 +9,7 @@ import reactRefreshPlugin from 'eslint-plugin-react-refresh';
 import importPlugin from 'eslint-plugin-import';
 import prettierConfig from 'eslint-config-prettier';
 
+const fixedReactHooksPlugin = fixupPluginRules(reactHooksPlugin);
 const fixedImportPlugin = fixupPluginRules(importPlugin);
 
 /** @type {import('eslint').Linter.Config[]} */
@@ -84,13 +85,13 @@ export default [
     files: ['**/*.{jsx,tsx}'],
     plugins: {
       react: reactPlugin,
-      'react-hooks': reactHooksPlugin,
+      'react-hooks': fixedReactHooksPlugin,
       'react-refresh': reactRefreshPlugin,
     },
     rules: {
       ...reactPlugin.configs.recommended.rules,
       ...reactPlugin.configs['jsx-runtime'].rules,
-      ...reactHooksPlugin.configs.recommended.rules,
+      ...fixedReactHooksPlugin.configs.recommended.rules,
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true },
@@ -105,6 +106,11 @@ export default [
           jsx: true,
         },
         jsxPragma: null, // for @typescript/eslint-parser
+      },
+    },
+    settings: {
+      react: {
+        version: 'detect',
       },
     },
   },
