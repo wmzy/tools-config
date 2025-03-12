@@ -68,6 +68,7 @@ export default [
         { allowWithDecorator: true },
       ],
       '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
+      '@typescript-eslint/no-invalid-void-type': 'off',
     },
   }),
   {
