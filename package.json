@@ -1,6 +1,6 @@
 {
   "name": "tools-config",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "config for eslint, prettier, typescript and others",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
