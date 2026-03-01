@@ -4,7 +4,7 @@ import tsEslint from 'typescript-eslint';
 import reactPlugin from 'eslint-plugin-react';
 import reactHooksPlugin from 'eslint-plugin-react-hooks';
 import reactRefreshPlugin from 'eslint-plugin-react-refresh';
-import importPlugin from 'eslint-plugin-import';
+import { importX } from 'eslint-plugin-import-x';
 import prettierConfig from 'eslint-config-prettier';
 
 /** @type {import('eslint').Linter.Config[]} */
@@ -12,7 +12,7 @@ export default [
   {
     files: ['**/*.{js,jsx,cjs,mjs,ts,tsx,cts,mts}'],
     rules: {
-      'import/order': [
+      'import-x/order': [
         'error',
         {
           groups: [
@@ -28,19 +28,8 @@ export default [
       ],
     },
     settings: {
-      'import/internal-regex': '^@/',
-      'import/ignore': ['node_modules/'],
-      'import/resolver': {
-        typescript: {
-          alwaysTryTypes: true,
-          project: [
-            'tsconfig.json',
-            'tsconfig.*.json',
-            'packages/*/tsconfig.json',
-            'packages/*/tsconfig.*.json',
-          ],
-        },
-      },
+      'import-x/internal-regex': '^@/',
+      'import-x/ignore': ['node_modules/'],
     },
   },
   {
@@ -105,11 +94,11 @@ export default [
   },
   {
     files: ['**/*.{js,jsx,cjs,mjs,ts,tsx,cts,mts}'],
-    ...importPlugin.flatConfigs.recommended,
+    ...importX.flatConfigs.recommended,
   },
   {
     files: ['**/*.{js,jsx,cjs,mjs,ts,tsx,cts,mts}'],
-    ...importPlugin.flatConfigs.typescript,
+    ...importX.flatConfigs.typescript,
   },
   {
     files: ['**/*.{js,jsx,cjs,mjs,ts,tsx,cts,mts}'],
