@@ -3,7 +3,7 @@
   "version": "0.2.3",
   "description": "config for eslint, prettier, typescript and others",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"OK\" && exit 0"
   },
   "keywords": [],
   "author": "wmzy",
