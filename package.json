@@ -18,21 +18,31 @@
     "./typescript": "./config/typescript/tsconfig.json"
   },
   "dependencies": {
-    "@eslint/js": "^9.17.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-import-resolver-typescript": "^3.7.0",
-    "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-react": "^7.37.3",
-    "eslint-plugin-react-hooks": "^5.1.0",
-    "eslint-plugin-react-refresh": "^0.4.16",
-    "globals": "^15.14.0",
-    "stylelint-prettier": "^5.0.2",
-    "typescript-eslint": "^8.18.2"
+    "@eslint/js": "^10.0.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-import-resolver-typescript": "^4.4.4",
+    "eslint-plugin-import-x": "^4.16.2",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "globals": "^17.6.0",
+    "stylelint-prettier": "^5.0.3",
+    "typescript-eslint": "^8.60.0"
   },
   "devDependencies": {
-    "@types/eslint": "^9.6.1",
-    "eslint": "^10.0.3",
-    "typescript": "^5.9.3"
+    "eslint": "^10.4.0",
+    "typescript": "^6.0.3"
+  },
+  "peerDependencies": {
+    "eslint": "^10.0.0",
+    "prettier": "^3.0.0 || ^4.0.0",
+    "stylelint": "^16.0.0",
+    "typescript": "^5.0.0 || ^6.0.0"
+  },
+  "peerDependenciesMeta": {
+    "prettier": { "optional": true },
+    "stylelint": { "optional": true },
+    "typescript": { "optional": true }
   },
   "repository": {
     "type": "git",
