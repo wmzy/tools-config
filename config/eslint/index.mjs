@@ -4,15 +4,15 @@ import tsEslint from 'typescript-eslint';
 import reactPlugin from 'eslint-plugin-react';
 import reactHooksPlugin from 'eslint-plugin-react-hooks';
 import reactRefreshPlugin from 'eslint-plugin-react-refresh';
-import importPlugin from 'eslint-plugin-import';
-import prettierConfig from 'eslint-config-prettier';
+import importPlugin from 'eslint-plugin-import-x';
+import prettierConfig from 'eslint-config-prettier/flat';
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
   {
     files: ['**/*.{js,jsx,cjs,mjs,ts,tsx,cts,mts}'],
     rules: {
-      'import/order': [
+      'import-x/order': [
         'error',
         {
           groups: [
@@ -28,9 +28,9 @@ export default [
       ],
     },
     settings: {
-      'import/internal-regex': '^@/',
-      'import/ignore': ['node_modules/'],
-      'import/resolver': {
+      'import-x/internal-regex': '^@/',
+      'import-x/ignore': ['node_modules/'],
+      'import-x/resolver': {
         typescript: {
           alwaysTryTypes: true,
           project: [
@@ -55,7 +55,6 @@ export default [
       tsEslint.configs.stylisticTypeChecked,
     ],
     rules: {
-      '@typescript-eslint/interface-name-prefix': 'off',
       '@typescript-eslint/explicit-function-return-type': 'off',
       '@typescript-eslint/explicit-module-boundary-types': 'off',
       '@typescript-eslint/no-unused-vars': 'warn',
@@ -89,10 +88,7 @@ export default [
   },
   {
     files: ['**/*.{js,ts,jsx,tsx}'],
-    plugins: {
-      'react-hooks': reactHooksPlugin,
-    },
-    rules: reactHooksPlugin.configs.recommended.rules,
+    ...reactHooksPlugin.configs.flat['recommended-latest'],
   },
   {
     files: ['**/*.{jsx,tsx}'],
