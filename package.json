@@ -12,7 +12,10 @@
     "config"
   ],
   "exports": {
-    "./eslint": "./config/eslint/index.mjs",
+    "./eslint": {
+      "types": "./config/eslint/index.d.ts",
+      "default": "./config/eslint/index.mjs"
+    },
     "./stylelint": "./config/stylelint",
     "./prettier": "./config/prettier.json",
     "./typescript": "./config/typescript/tsconfig.json"
