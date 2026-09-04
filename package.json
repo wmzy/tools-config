@@ -33,7 +33,10 @@
       "types": "./config/eslint/type-checked.d.ts",
       "default": "./config/eslint/type-checked.mjs"
     },
-    "./stylelint": "./config/stylelint/index.mjs",
+    "./stylelint": {
+      "types": "./config/stylelint/index.d.ts",
+      "default": "./config/stylelint/index.mjs"
+    },
     "./prettier": "./config/prettier.json",
     "./typescript": "./config/typescript/tsconfig.json",
     "./package.json": "./package.json"

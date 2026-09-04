@@ -32,6 +32,8 @@ export default config;
 
 type-checked 入口通过 `projectService` 自动定位项目中的 `tsconfig.json`。未被任何 tsconfig 覆盖的文件会直接报错——只适合完整纳入 tsconfig 的 TS 项目。
 
+环境 globals 的预设：`jsx/tsx` 文件获得 browser + serviceworker globals；`.cjs` 由 ESLint 自动获得 commonjs globals；`.js` 不预设环境（node 或 browser 由项目自行声明，避免对非浏览器项目误判）。
+
 ### React 插件现状
 
 `eslint-plugin-react` 因尚不支持 ESLint 10（peer 上限 `^9.7`，且 `settings.react.version: 'detect'` 会触发上游崩溃）暂未启用，待上游发布兼容版本后恢复。
@@ -55,6 +57,8 @@ export default {
 ```
 
 设计意图是极简：只启用 `prettier/prettier`（与 Prettier 保持一致的格式）和 `block-no-empty` 两条规则。风格类检查交给 Prettier 与 ESLint，Stylelint 不重复造轮子。如需标准 CSS 规则集，可在项目配置中自行 `extends: ['stylelint-config-standard', 'tools-config/stylelint']`。
+
+注意：使用本入口需要同时安装 `prettier`（`stylelint-prettier` 的运行时依赖）。
 
 ## TypeScript
 

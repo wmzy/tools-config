@@ -9,7 +9,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 - **Install dependencies:** `pnpm install`
-- **Test:** `pnpm test` — `scripts/smoke.sh` 以消费方视角验证四个入口（ESLint pass/fail 断言、Prettier/Stylelint 自检与拦截、tsconfig extends 编译）
+- **Test:** `pnpm test` — `scripts/smoke.sh` 以消费方视角验证四个入口（ESLint pass/fail 断言、包名导入的 exports map 回归、Prettier/Stylelint 自检与拦截、tsconfig extends 编译）
 - **No build step** — config files in `config/` are distributed as-is
 
 ## Architecture

@@ -34,6 +34,13 @@ fi
   fi
 )
 
+# --- ESLint：消费方视角，按包名导入（exports map + 插件解析回归） ---
+(
+  cd fixtures/eslint/consumer
+  eslint pass.js ||
+    fail 'eslint consumer package-name import'
+)
+
 # --- Prettier：发布配置自检 + 违规文件必须被拦下 ---
 prettier --check --config config/prettier.json config fixtures/prettier/pass.js \
   package.json .releaserc.json ||
@@ -52,6 +59,13 @@ if stylelint --config config/stylelint/index.mjs fixtures/stylelint/fail.css \
   >/dev/null 2>&1; then
   fail 'stylelint should reject fail.css'
 fi
+
+# --- Stylelint：消费方视角，extends 包名（exports map 回归） ---
+(
+  cd fixtures/stylelint/consumer
+  stylelint pass.css ||
+    fail 'stylelint consumer extends package name'
+)
 
 # --- TypeScript：以消费方视角 extends 发布配置并真实编译 ---
 tsc --noEmit -p fixtures/tsconfig/tsconfig.json ||

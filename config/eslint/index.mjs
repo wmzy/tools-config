@@ -29,6 +29,10 @@ export default [
     },
     settings: {
       'import-x/internal-regex': '^@/',
+      // 跳过 node_modules 内文件的 ExportMap 解析：
+      // 既省性能，也避免对外部包的文档化 default+member 写法（如
+      // tseslint.configs.*、importX.flatConfigs.*）产生
+      // no-named-as-default-member 噪音。删除会立刻在自检中被抓到。
       'import-x/ignore': ['node_modules/'],
       'import-x/resolver': {
         typescript: {
@@ -79,13 +83,6 @@ export default [
     files: ['**/*.{js,jsx,cjs,mjs,ts,tsx,cts,mts}'],
     rules: {
       ...prettierConfig.rules,
-    },
-  },
-  {
-    files: ['**/*.mjs'],
-    languageOptions: {
-      ecmaVersion: 'latest',
-      sourceType: 'module',
     },
   },
 ];
