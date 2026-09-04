@@ -1,11 +1,11 @@
 import js from '@eslint/js';
 import globals from 'globals';
-import tsEslint from 'typescript-eslint';
-import reactPlugin from 'eslint-plugin-react';
 import reactHooksPlugin from 'eslint-plugin-react-hooks';
 import reactRefreshPlugin from 'eslint-plugin-react-refresh';
 import importPlugin from 'eslint-plugin-import-x';
 import prettierConfig from 'eslint-config-prettier/flat';
+
+import { baseTsConfig } from './parts.mjs';
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
@@ -47,44 +47,12 @@ export default [
     files: ['**/*.{js,jsx,cjs,mjs}'],
     ...js.configs.recommended,
   },
-  ...tsEslint.config({
-    files: ['**/*.{ts,tsx,cts,mts}'],
-    extends: [
-      js.configs.recommended,
-      tsEslint.configs.strictTypeChecked,
-      tsEslint.configs.stylisticTypeChecked,
-    ],
-    rules: {
-      '@typescript-eslint/explicit-function-return-type': 'off',
-      '@typescript-eslint/explicit-module-boundary-types': 'off',
-      '@typescript-eslint/no-unused-vars': 'warn',
-      '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/no-confusing-void-expression': 'off',
-      '@typescript-eslint/no-non-null-assertion': 'off',
-      '@typescript-eslint/prefer-nullish-coalescing': 'off',
-      '@typescript-eslint/no-extraneous-class': [
-        'error',
-        { allowWithDecorator: true },
-      ],
-      '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
-      '@typescript-eslint/no-invalid-void-type': 'off',
-      '@typescript-eslint/restrict-template-expressions': [
-        'error',
-        { allowNumber: true },
-      ],
-    },
-  }),
+  ...baseTsConfig,
+  // eslint-plugin-react 尚不支持 ESLint 10（见 README「已知限制」），
+  // 上游修复前暂不启用其规则；仅保留 hooks / refresh。
   {
     files: ['**/*.{jsx,tsx}'],
     ...reactRefreshPlugin.configs.recommended,
-  },
-  {
-    files: ['**/*.{jsx,tsx}'],
-    ...reactPlugin.configs.flat.recommended,
-  },
-  {
-    files: ['**/*.{jsx,tsx}'],
-    ...reactPlugin.configs.flat['jsx-runtime'],
   },
   {
     files: ['**/*.{js,ts,jsx,tsx}'],
