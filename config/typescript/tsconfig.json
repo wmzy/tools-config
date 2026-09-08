@@ -11,6 +11,11 @@
     "strict": true,
     "noUncheckedIndexedAccess": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    // 默认不产出：base 面向 bundler 项目（tsc 只做类型检查），
+    // 裸跑 tsc 不会把 JS 吐进 src/。需要 tsc 产出的项目必须
+    // 显式 "noEmit": false 并自定 outDir——共享配置无法替消费方
+    // 决定产物去向。
+    "noEmit": true
   }
 }

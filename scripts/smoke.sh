@@ -67,8 +67,17 @@ fi
     fail 'stylelint consumer extends package name'
 )
 
-# --- TypeScript：以消费方视角 extends 发布配置并真实编译 ---
-tsc --noEmit -p fixtures/tsconfig/tsconfig.json ||
-  fail 'tsconfig extends/compile'
+# --- TypeScript：消费方视角 extends 发布配置，默认零产物 ---
+# 不带 --noEmit：验证 base 的 noEmit 默认值本身生效，
+# 防止裸跑 tsc 把 JS 吐进 src/ 被误提交。
+(
+  cd fixtures/tsconfig
+  rm -f src/index.js src/index.js.map src/index.d.ts
+  tsc -p tsconfig.json ||
+    fail 'tsconfig extends/compile'
+  if [ -e src/index.js ] || [ -e src/index.d.ts ]; then
+    fail 'tsconfig should not emit into src by default'
+  fi
+)
 
 echo 'smoke OK'

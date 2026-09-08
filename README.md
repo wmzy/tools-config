@@ -62,19 +62,27 @@ export default {
 
 ## TypeScript
 
+基础配置只含环境无关的编译选项（`strict`、`moduleResolution: bundler`、`noEmit` 等）。默认 **不产出**：面向 bundler 项目（tsc 只做类型检查），裸跑 `tsc` 不会把产物吐进 `src/` 造成误提交。
+
+需要 tsc 产出的项目（如发布库）显式 opt-out 并自定产物去向：
+
 ```json
 // tsconfig.json
 {
   "extends": "tools-config/typescript",
   "compilerOptions": {
+    "noEmit": false,
     "outDir": "dist",
+    "rootDir": "src",
     "declaration": true
   },
   "include": ["src"]
 }
 ```
 
-基础配置只含环境无关的编译选项（`strict`、`moduleResolution: bundler` 等）。构建相关选项（`outDir`、`declaration`、`sourceMap` 等）由各项目自行声明——共享 base config 硬编码 `outDir` 会导致产物写进 `node_modules`（`${configDir}` 指向配置所在目录）。
+`rootDir` 在 TypeScript 6 下为必需（否则 TS5011）；它同样是项目布局信息，不能由共享配置代劳。
+
+共享 base config 无法替你决定 `outDir`：历史上把 `outDir` 硬编码进共享配置（`${configDir}` 指向配置所在目录）会导致产物写进 `node_modules`。构建参数一律由项目自行声明。
 
 ## 开发
 
@@ -82,4 +90,4 @@ export default {
 pnpm test
 ```
 
-`scripts/smoke.sh` 以消费方视角验证四个入口：ESLint 默认/type-checked 入口对 pass/fail 样本分别断言、Prettier 与 Stylelint 对发布配置自检并拦截违规样本、TypeScript 以 `extends` 方式真实编译。CI 同时跑 `--frozen-lockfile` 安装，锁文件漂移会直接失败。
+`scripts/smoke.sh` 以消费方视角验证四个入口：ESLint 默认/type-checked 入口对 pass/fail 样本分别断言、包名导入的 exports map 回归、Prettier 与 Stylelint 对发布配置自检并拦截违规样本、TypeScript 以 `extends` 方式编译并断言默认零产物。CI 同时跑 `--frozen-lockfile` 安装，锁文件漂移会直接失败。
